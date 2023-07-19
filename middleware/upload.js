@@ -3,11 +3,10 @@ const multer = require('multer')
 
 // реализация хранения и обработки файлов, потому что кириллица из формы Windows-1251
 function getDestination (req, file, cb) {
-
     if(file.mimetype.startsWith('image/')) {
-      cb(null, `./bookFiles/cover/${Date.now()}-${file.originalname}`)
+      cb(null, `./public/bookFiles/cover/${Date.now()}-${file.originalname}`)
     } else {
-      cb(null, `./bookFiles/${Date.now()}-${file.originalname}`)
+      cb(null, `./public/bookFiles/${Date.now()}-${file.originalname}`)
     }
 }
 
@@ -24,24 +23,21 @@ MyCustomStorage.prototype._handleFile = function _handleFile (req, file, cb) {
     // проверка только на ошибку
     function cbWrite(err) {
       if(err) {
-        console.log('err callback');
         cb(err)
         return
       }
     }
     // вспомогательная функция для обработки события drain
     function write(data, cbWrite) {
-      if (!writeStream.write(data)) {
-        writeStream.once('drain', (err)=>{
-          cbWrite(err)
-        });
+      if (!writeStream.write(data, cbWrite)) {
+        writeStream.once('drain', cbWrite);
       } else {
         process.nextTick(cbWrite);
       }
     }
  
     // события чтения
-    file.stream.on('data', chunk => {
+    file.stream.on('data', async chunk => {
       // если пришла только обложка, ограничиваемся только записью
       if(file.mimetype.startsWith('image/')) {
         write(chunk, cbWrite)
@@ -80,7 +76,6 @@ MyCustomStorage.prototype._removeFile = function _removeFile (req, file, cb) {
 module.exports = multer({
   storage: new MyCustomStorage(),
   fileFilter: (req, file, cb) => {
-    console.log('fileFilter');
       //postman сам перекодирует фаил и название. В случае загрузки из браузера без обработчика
       //вот временное решение перекодировки названия файла
       file.originalname = Buffer.from(file.originalname, 'latin1').toString('utf8');

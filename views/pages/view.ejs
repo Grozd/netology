@@ -1,0 +1,13 @@
+<%- include('../includes/layout-start')%>
+
+<div class="book container">
+    <div class="book__wrapper">
+        <%- include('../includes/components/image', {fileCover: book.fileCover})%>
+    </div>
+    <h2><%= book.title %></h2>
+    <h3><%= book.authors %></h3>
+    <p><%= book.description %></p>
+</div>
+
+
+<%- include('../includes/layout-end')%>

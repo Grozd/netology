@@ -15,6 +15,6 @@ module.exports = {
         }
     },
     read: function(req, res, next) {
-
+        next()
     }
 }

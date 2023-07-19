@@ -1,0 +1,40 @@
+<%- include('../includes/layout-start') -%>
+
+<h2 class="h_listBooks">Список книг</h2>
+
+<% if('message' in books) { %>
+    <div class="message"><%= books.message -%></div>
+<% } else { %>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Название</th>
+            <th>Автор</th>
+            <th>Описание</th>
+            <th>Обложка</th>
+            <th>Действие</th>
+        </tr>
+    </thead>
+    <% books.payload.forEach(book => { %>
+    <tr>
+        <td><%- book.title %></td>
+        <td><%- book.authors %></td>
+        <td><%- book.description %></td>
+        <td><%- include('../includes/components/image', {fileCover: book.fileCover }) %></td>
+        <td>
+            <div class="action__table">
+                
+                <%- include('../includes/components/link', {text: 'просмотр', href: `/api/books/${book.id}`}) %>
+                <%- include('../includes/components/link', {text: 'изменить', href: `/update/${book.id}`}) %>
+                <%- include('../includes/components/button', {text: 'удалить', class_: 'btnDel', id: book.id}) %>
+                
+            </div>
+        </td>
+    </tr>        
+    <% }) %>
+</table>
+
+<% } %>
+<%- include('../includes/script') -%>
+<%- include('../includes/layout-end')%>

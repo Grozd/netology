@@ -2,14 +2,14 @@
 function Storage() {
     this.users = []
     this.books = []
-
 }
 // по книгам
 Storage.prototype.getAllBooks = function() {
     return this.books
 }
 Storage.prototype.getBookById = function(id) {
-    return this.books.find(book => book.id === id)
+    let f = this.books.find(book => book.id === id)
+    return f
 }
 Storage.prototype.setBookById = function(id, newBook) {
     let foundIndex = this.findIndexById(id)
@@ -30,8 +30,8 @@ Storage.prototype.getIdBookByTitleAndAuthors = function(title, authors) {
     else return false
 }
 Storage.prototype.setFileCover = function(id, path) {
-    let foundBook = this.getBookById(id)
-    foundBook.fileCover = path
+    let foundBook = this.findIndexById(id)
+    this.books[foundBook].fileCover = path
     return true
 }
 // по пользователям
@@ -40,6 +40,10 @@ Storage.prototype.getAllUsers = function() {
 }
 Storage.prototype.getUserById = function(id) {
     return this.users.find(user => user.id === id)
+}
+// по содержанию
+Storage.prototype.getContent = function(key) {
+    return this.content[key]
 }
 
 

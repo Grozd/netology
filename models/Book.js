@@ -22,7 +22,7 @@ class Book {
     }
 
     static createBook(obj) {
-        let newBook = new Book(obj)
+        let newBook = Object.freeze(new Book(obj))
         storage.books.push(newBook)
         return newBook.id
     }
@@ -32,6 +32,19 @@ class Book {
         storage.setBookById(id, newBook)
         return newBook.id
     }
+
+/*     getTitle() {
+        return this.title
+    }
+    getDescription() {
+        return this.description
+    }
+    getAuthors() {
+        return this.authors
+    }
+    getAuthors() {
+        return this.authors
+    } */
 }
 
 module.exports = Book

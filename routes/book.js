@@ -11,15 +11,19 @@ function matchId(req, res, next) {
     next()
 }
 
-router.route(/^\/api\/books$/)
-.get(bookController.read)
-.post(
+// переходы по страницам
+router.get('/', bookController.get_pageIndex)
+router.get('/create', bookController.get_pageCreate)
+router.get('/update/:id', matchId, bookController.get_pageUpdate)
+
+//действия
+router.post(/^\/api\/books$/,
     upload.fields([{name: 'fileBook'}, {name: 'fileCover'}]),
-    bookController.create
+    bookController.post_create
 )
 
 router.route('/api/books/:id')
-.get(matchId, bookController.readByID)
+.get(matchId, bookController.get_pageView)
 .put(
     matchId,
     upload.fields([{name: 'fileBook'}, {name: 'fileCover'}]),
@@ -29,7 +33,7 @@ router.route('/api/books/:id')
 
 router.get('/api/books/:id/download', matchId, bookController.download)
 
-router.route('/api/books/*', errorController.error)
+router.route('*', errorController.error)
 
 
 module.exports = router

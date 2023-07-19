@@ -1,0 +1,144 @@
+<script async="false">
+    // обработчик запроса на удаление
+    function reqDel(id) {
+        console.log('запрос на удаление');
+        fetch(`/api/books/${id}`,{
+            method: 'DELETE'
+        }).then(res=>{
+            location.reload()
+        })
+        .catch(err=>console.log(err, 'не успех'))
+    }
+
+    // подписываемся на удаление
+    function listenReqDel() {
+        const btnDel = document.querySelector('.btnDel')
+        let dataId
+        //console.log(btnDel, 'btnDel!!!!');
+        if(btnDel) {
+            /* for (const key in btnDel) {
+                if(Object.hasOwnProperty.call(btnDel, key))
+                dataId = btnDel[key].getAttribute('data-id')
+                btnDel[key].onclick = reqDel.bind(null, dataId)
+            } */
+            dataId = btnDel.getAttribute('data-id')
+            btnDel.onclick = reqDel.bind(null, dataId)
+        }
+    }
+
+    // обработчик запроса на обновление
+    function reqUpdate(id) {
+        console.log('запрос на обновление');
+        fetch(`/update/${id}`,{
+            method: 'GET'
+        }).then(res=>{
+            location.reload()
+        })
+        .catch(err=>console.log(err, 'не успех'))
+    }
+
+    // подписываемся на обновление
+    function listenReqUpdate() {
+        const btnUpdate = document.querySelector('.btnUpdate')
+        //console.log(btnUpdate, 'btnUpdate!!!!');
+        let dataId
+        if(btnUpdate) {
+            dataId = btnUpdate.getAttribute('data-id')
+            btnUpdate.onclick = reqUpdate.bind(null, dataId)
+        }
+    }
+
+    // обработчик на создание книги
+    async function reqCreate() {
+        const form = document.querySelector('.formNewBook')
+        const formData = false
+        let data = false
+        let headers = false
+        if(form.fileBook.value || form.fileCover.value) {
+            formData = new FormData(form)
+            headers = {
+                'Content-Type': 'multipart/form-data'
+            }
+        } else {
+            data = {}
+            for (const iterator of form) {
+                data[iterator.name] = iterator.value
+            }
+            data = JSON.stringify(data)
+            headers = {
+                'Content-Type': 'application/json'
+            }
+        }
+        //console.log('запрос formData', formData);
+        //console.log('запрос data', data);
+        
+        const response = await fetch("http://localhost:3000/api/books", {
+            method: 'POST',
+            headers: headers,
+            body: formData ? formData : data
+        })
+        .then(async res => {
+
+            let text = await res.json()
+            console.log(text, 'response server')
+            if('redirect' in text) {
+                location.replace(text.redirect)
+                return
+            } else {
+                message(text)
+            }
+        })
+        .catch(err=>console.log(err, 'error'))
+    }
+
+    async function reqUpdate() {
+        const form = document.querySelector('.formUpdateBook')
+        const id = form.getAttribute('data-id')
+        console.log(id, '<<<-------------------id');
+        const formData = false
+        let data = false
+        let headers = false
+        if(form.fileBook.value || form.fileCover.value) {
+            formData = new FormData(form)
+            headers = {
+                'Content-Type': 'multipart/form-data'
+            }
+        } else {
+            data = {}
+            for (const iterator of form) {
+                data[iterator.name] = iterator.value
+            }
+            data = JSON.stringify(data)
+            headers = {
+                'Content-Type': 'application/json'
+            }
+        }
+        
+        const response = await fetch(`http://localhost:3000/api/books/${id}`, {
+            method: 'PUT',
+            headers: headers,
+            body: formData ? formData : data
+        })
+        .then(async res => {
+            let text = await res.json()
+            console.log(text, 'response server')
+            if('redirect' in text) {
+                location.replace(text.redirect)
+                return
+            } else {
+                message(text)
+            }
+        })
+        .catch(err=>console.log(err, 'error'))
+    }
+
+    // html элемент с сообщением ошибки
+    function message(text) {
+        //console.log(text, 'text');
+        const mesElem = document.querySelector('.message')
+        mesElem.textContent = text.message
+    }
+
+    listenReqUpdate()
+    listenReqDel()
+</script>
