@@ -1,0 +1,17 @@
+<%- include('../includes/layout-start')%>
+
+<div class="book container">
+    <div class="book__wrapper">
+        <%- include('../includes/components/image', {fileCover: book.fileCover})%>
+    </div>
+    <h2><%= book.title %></h2>
+    <h3><%= book.authors %></h3>
+    <p><%= book.description %></p>
+    <div class="counter" data-id="<%= book.id %>"></div>
+
+    <%- include('../includes/components/link', {text: 'изменить', href: `/update/${book.id}`}) %>
+    <%- include('../includes/components/form', {text: 'удалить', id: book.id }) %>
+</div>
+
+<%- include('../includes/script') -%>
+<%- include('../includes/layout-end')%>
