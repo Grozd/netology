@@ -2,23 +2,14 @@ services:
   library:
     build: ./library
     image: grozddv/testrepo:library
-    container_name: library
 #    volumes:
 #      - ./library/src/DB/:/app/src/DB/
     ports:
       - "3000:3000"
-    networks:
-      - net
   counter:
     build: ./counter
     image: grozddv/testrepo:counter
-    container_name: counter
     ports:
       - "3001:3001"
 #    volumes:
 #      - ./counter/src/:/app/src/
-    networks:
-      - net
-networks:
-  net:
-    driver: bridge

@@ -1,24 +1,3 @@
 <script async="false">
 
-    // вариант запроса на увеличение счетчика с клиента
-    async function handlerCounter() {
-        const elemCounter = document.querySelector('.counter')
-        const id = elemCounter.getAttribute('data-id')
-        let response = await fetch(`http://0.0.0.0:3001/counter/${id}/incr`, {
-            method: 'POST',
-            headers: {
-                'Origin': 'http://library:3000'
-            }
-        })
-        .catch(err => console.log('запрос счетчику POST incr: провал ', err))
-        response = await response.json()
-        elemCounter.textContent = 'просмотров: ' + response.data
-    }
-
-    // html элемент с сообщением ошибки
-    function message(text) {
-        const mesElem = document.querySelector('.message')
-        mesElem.textContent = text.message
-    }
-
 </script>

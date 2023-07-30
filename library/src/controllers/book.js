@@ -1,27 +1,19 @@
 const { Book } = require('../models')
 const { getIdBookByTitleAndAuthors, setFileCover, removeById, getAllBooks } = require('../DB/db')
-const { host, port } = require('../config.json')
-const url = new URL(`http://${host}${port}`)
+const { HOST, PORT, COUNTER_URL } = require('../config.json')
+const url = new URL(`http://${HOST}${PORT}`)
 
 // запрос на создание счетчика для книги
 async function getCounter(id) {
-    let response = await fetch(`http://counter:3001/counter/${id}`, {
-            method: 'GET',
-            headers: {
-                'Origin': 'http://library:3000'
-            }
-    })
+    let response = await fetch(`${COUNTER_URL}/counter/${id}`)
     .catch(err => console.log(err, 'запрос счетчику GET: провал'))
     response = await response.json()
     return response.data
 }
 // запрос на увеличение счетчика для книги
 async function postIncrCounter(id) {
-    let response = await fetch(`http://counter:3001/counter/${id}/incr`, {
-        method: 'POST',
-        headers: {
-            'Origin': 'http://library:3000'
-        }
+    let response = await fetch(`${COUNTER_URL}/counter/${id}/incr`, {
+        method: 'POST'
     })
     .catch(err => console.log('запрос счетчику POST incr: провал ', err))
     response = await response.json()
@@ -30,11 +22,8 @@ async function postIncrCounter(id) {
 
 // запрос на удаление счетчика для книги после удаления самой книги
 async function postDelCounter(id) {
-    fetch(`http://counter:3001/counter/${id}/delete`, {
-            method: 'POST',
-            headers: {
-                'Origin': 'http://library:3000'
-            }
+    fetch(`${COUNTER_URL}//counter/${id}/delete`, {
+            method: 'POST'
     })
     .catch(err => console.log(err, 'запрос счетчику delete POST: провал'))
 }

@@ -27,7 +27,7 @@ class Book {
         return newBook.id
     }
 
-    static updateBook(id, obj) {
+    static async updateBook(id, obj) {
         let newBook = new Book(obj)
         newBook.id = id
         setById('books', id, newBook)

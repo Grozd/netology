@@ -1,5 +1,5 @@
 const {v4: uuid } = require('uuid')
-const { add, setById } = require('../DB/db')
+const { add } = require('../DB/db')
 
 class User {
     id = uuid()
@@ -7,9 +7,9 @@ class User {
         this.mail = mail
     }
 
-    static createUser(mail) {
+    static async createUser(mail) {
         let newUser = new User(mail)
-        add('users', newUser)
+        await add('users', newUser)
         return newUser.id
     }
 }
