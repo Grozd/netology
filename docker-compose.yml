@@ -1,0 +1,14 @@
+services:
+  library:
+    build: ./library
+    image: grozddv/testrepo:library
+    ports:
+      - "3000:3000"
+  counter:
+    build: ./counter
+    image: grozddv/testrepo:counter
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example

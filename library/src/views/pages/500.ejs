@@ -1,0 +1,9 @@
+<%- include('../includes/layout-start') -%>
+
+<% if(message) { %>
+    <h1>500 | <%= message -%></h1>
+<% } else { %>
+    <h1>500 | Ошибка на стороне сервера</h1>
+<% } %>
+
+<%- include('../includes/layout-end')%>
