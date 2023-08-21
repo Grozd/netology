@@ -1,6 +1,0 @@
-{
-    "HOST": "localhost",
-    "PORT": 3000,
-    "COUNTER_URL": "http://counter:3001",
-    "MONGODB_URL": "mongodb://mongo:27017/library"
-}
