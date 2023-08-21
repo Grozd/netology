@@ -1,4 +1,0 @@
-{
-    "PORT": 3001,
-    "MONGODB_URL": "mongodb://mongo:27017/counter"
-}
