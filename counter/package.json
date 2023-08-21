@@ -4,14 +4,12 @@
   "description": "",
   "main": "./src/app.js",
   "scripts": {
-    "mongod": "mongod --bind_ip 127.0.0.1 --port 27017 --dbpath E:/dev/dataDB",
-    "mongosh": "mongosh mongodb://127.0.0.1:27017/counter",
-    "start": "node src/app.js"
+    "start": "node ./src/app.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "mongoose": "^7.4.2"
+    "mongoose": "^7.4.1"
   }
 }

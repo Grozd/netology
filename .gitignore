@@ -1,4 +1,0 @@
-library/node_modules/*
-library/package-lock.json
-.env
-index.html

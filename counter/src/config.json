@@ -1,4 +1,4 @@
 {
     "PORT": 3001,
-    "MONGODB_URL": "mongodb://127.0.0.1:27017/counter"
+    "MONGODB_URL": "mongodb://mongo:27017/counter"
 }

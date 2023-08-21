@@ -4,11 +4,16 @@ services:
     image: grozddv/testrepo:library
     ports:
       - "3000:3000"
+    environment:
+      - HOST=localhost
+      - PORT=3000
+      - COUNTER_URL=http://counter:3001
+      - MONGODB_URL=mongodb://mongo:27017/library
   counter:
     build: ./counter
     image: grozddv/testrepo:counter
-  mongo:
-    image: mongo
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
+     - PORT=3001
+     - MONGODB_URL=mongodb://mongo:27017/counter
+  mongo:
+    image: mongo:4.4.18

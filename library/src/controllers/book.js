@@ -1,12 +1,11 @@
 const Book = require('../models/Book')
-const { HOST, PORT, COUNTER_URL } = require('../config.json')
-const url = new URL(`http://${HOST}${PORT}`)
+const url = new URL(`http://${process.env.HOST}${process.env.PORT}`)
 const { BadRequest, ServerError } = require('../models/Errors')
 
 // запрос на создание счетчика для книги
 async function getCounter(id, next) {
     try {
-        let response = await fetch(`${COUNTER_URL}/counter/${id}`)
+        let response = await fetch(`${process.env.COUNTER_URL}/counter/${id}`)
         response = await response.json()
         return response.data
     } catch (error) {
@@ -16,7 +15,7 @@ async function getCounter(id, next) {
 // запрос на увеличение счетчика для книги
 async function postIncrCounter(id) {
     try {
-        let response = await fetch(`${COUNTER_URL}/counter/${id}/incr`, {
+        let response = await fetch(`${process.env.COUNTER_URL}/counter/${id}/incr`, {
             method: 'POST'
         })
         response = await response.json()
@@ -28,7 +27,7 @@ async function postIncrCounter(id) {
 // запрос на удаление счетчика для книги после удаления самой книги
 async function postDelCounter(id) {
     try {
-        fetch(`${COUNTER_URL}//counter/${id}/delete`, {
+        fetch(`${process.env.COUNTER_URL}//counter/${id}/delete`, {
             method: 'POST'
     })
     } catch (error) {
@@ -98,7 +97,7 @@ module.exports = {
                     setFileCover(id, fileCover.path)
                 }
                 if(newBook) {
-                    res.set('Content-Location', url + 'api/books' + `/${newBook.id}`)
+                    res.set('Content-Location', url + 'create' + `/${newBook.id}`)
                     res.redirect('/')
                 } else {
                     // когда будем создавать фаил книги пригодится. в идеале не создавать книгу без файла

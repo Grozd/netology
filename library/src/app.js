@@ -1,7 +1,6 @@
 const express = require('express')
 const path = require('path')
 const mongoose = require('mongoose')
-const { PORT, MONGODB_URL } = require('./config.json')
 const handleErrors = require('./middleware/handleErrors')
 
 async function listDatabases(client){
@@ -11,7 +10,7 @@ async function listDatabases(client){
 }
 
 async function createDB() {
-    let client = await mongoose.connect(MONGODB_URL, {maxPoolSize: 10})
+    let client = await mongoose.connect(process.env.MONGODB_URL, {maxPoolSize: 10})
     client = client.connection
     client.useDb()
     //await listDatabases(client)
@@ -29,7 +28,7 @@ async function start(client) {
         app.use(express.json())
         app.use(router)
         app.use(handleErrors)
-        app.listen(PORT, ()=>{
+        app.listen(process.env.PORT, ()=>{
             console.log('Сервер запущен')
         })
 

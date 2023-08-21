@@ -1,6 +1,5 @@
 const { User } = require('../models')
-const { HOST, PORT } = require('../config.json')
-const url = new URL(`http://${HOST}${PORT}`)
+const url = new URL(`http://${process.env.HOST}${process.env.PORT}`)
 
 module.exports = {
     create: async function(req, res, next) {
