@@ -1,0 +1,9 @@
+<%- include('../includes/layout-start') -%>
+
+<% if(message) { %>
+    <h1>404 | <%= message -%></h1>
+<% } else { %>
+    <h1>404 | Страница не найдена</h1>
+<% } %>
+
+<%- include('../includes/layout-end')%>
