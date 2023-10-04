@@ -1,0 +1,29 @@
+<%- include('../includes/layout-start') -%>
+
+<h2 class="h_login">вход или регистрация аккаунта</h2>
+
+<%- include('../includes/components/note') -%>
+
+    <input type="checkbox" id="access_auth" />
+    <div class="wrapForm_signup" id="wrapForm_signup">
+        <form class="formSignup" method="post" action="http://localhost:3000/api/user/signup">
+            <label class="form__loginLabel">логин</label>
+            <input name="username" required/>
+            <label class="form__passwordLabel">пароль</label>
+            <input name="password" required/>
+            <%- include('../includes/components/button', {text: 'Зарегистрироваться', type: 'submit', className: ''}) %>
+        </form>
+        <label for="access_auth" class="link_signup">Войти</label>
+    </div>
+    <div class="wrapForm_login" id="wrapForm_login">
+        <form class="formLogin" method="post" action="http://localhost:3000/api/user/login">
+            <label class="form__loginLabel">логин</label>
+            <input name="username" required/>
+            <label class="form__passwordLabel">пароль</label>
+            <input name="password" required/>
+            <%- include('../includes/components/button', {text: 'Войти', type: 'submit', className: ''}) %>
+        </form>
+        <label for="access_auth" class="link_login">Регистрация</label>
+    </div>
+
+<%- include('../includes/layout-end')%>

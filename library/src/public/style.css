@@ -1,0 +1,367 @@
+/*E:\dev\programs\js\netology\socketIO-2.9\library\src\public\image*/
+/* предустановки */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+body,h1,h2,h3,h4,p,ul[class],ol[class],li,figure,figcaption,blockquote,dl,
+dd, button {
+  margin: 0;
+  padding: 0;
+}
+
+
+
+/* -----------------------------------------------------------------шрифты----------------------------------------------------------------- */
+body {
+    font-family:'Times New Roman', Times, serif;
+    min-height: 100vh;
+    line-height: 1.5;
+    font-size: 2vh;
+    color: #252525;
+}
+input {
+    font-family:'Times New Roman', Times, serif;
+    font-size: 2vh;
+}
+input[type='file'] {
+    font-family:'Times New Roman', Times, serif;
+    font-size: 1.6vh
+}
+button {
+    font-family:'Times New Roman', Times, serif;
+    font-size: 2vh;
+}
+textarea {
+    font-family:'Times New Roman', Times, serif;
+    font-size: 2vh;
+}
+.note {
+    line-height: normal;
+    font-size: 2vh;
+    font-weight: 400;
+}
+
+
+
+/* -----------------------------------------------------------------общие----------------------------------------------------------------- */
+html {
+    background: url('./image/fon.jpg');
+}
+body {
+    scroll-behavior: smooth;
+    text-rendering: optimizeSpeed;
+}
+ul[class],ol[class] {
+  padding: 0;
+}
+input {
+    flex-shrink: 1;
+    padding: 3px;
+}
+label {
+    flex-shrink: 1;
+}
+a {
+    text-decoration: none;
+    color: #252525;
+}
+.table {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+td {
+    border: 1px solid grey;
+}
+th {
+    border: 1px solid grey;
+}
+.nav {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(223, 199, 169);
+    font-size: clamp(1vh, 4vh, 7vh);
+    width: 100%;
+}
+.nav__ul {
+    display: inherit;
+    list-style-type: none;
+    width: inherit;
+    max-width: inherit;
+    justify-content: center;
+}
+.nav__item {
+    display: inherit;
+    padding: 10px 30px;
+    background-color: #9c74b1;
+}
+.nav__item:hover {
+    background-color: rgb(80, 104, 56);
+}
+.nav__item_link {
+    display: inherit;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #9c9c9c;
+    width: 60vw;
+    margin: auto;
+}
+.h_listBooks, .h_create, .h_login, .h_profile, .h_update, .h_view{
+    width: 100%;
+    text-align: center;
+    padding: 30px 0px 30px;
+    background-color: rgba(135, 196, 175, 0.753);
+    font-weight: 400;
+}
+.table {
+    table-layout: fixed;
+    width: 100%;
+}
+.note {
+    background-color: rgb(141, 141, 141);
+    color: rgb(209, 24, 0);
+    position: relative;
+    padding: 10px;
+    width: 100%;
+    height: 50px;
+    text-align: center;
+}
+
+
+
+/* -----------------------------------------------------------------счетчик----------------------------------------------------------------- */
+.wrapDataBook_counter {
+    text-align: left;
+}
+
+
+
+/* -----------------------------------------------------------------формы----------------------------------------------------------------- */
+form {
+    text-align: center;
+}
+.formDel {
+    padding: 0;
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: 20%;
+    height: 80%;
+    border-radius: 10%;
+    line-height: normal;
+}
+.form__label {
+    padding: 10px;
+}
+.formNewBook, .formUpdateBook, .formLogin, .formSignup {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background-color: cadetblue;
+    width: 16vw;
+}
+
+
+
+/* -----------------------------------------------------------------кнопки----------------------------------------------------------------- */
+.btnSubmit {
+    background-color: #e7f066;
+    border-top-color: #706f6f;
+    border-left-color: #706f6f;
+    border-right-color: #000000;
+    border-bottom-color: #000000;
+    margin-top: 10px;
+    padding: 10px;
+}
+.btnDelete {
+    width: 100%;
+    height: 100%;
+    border-style: none;
+    background: #b621fe;
+}
+.btnLink {
+    background-color: #e7f066;
+    border: 3px solid;
+    border-top-color: #706f6f;
+    border-left-color: #706f6f;
+    border-right-color: #000000;
+    border-bottom-color: #000000;
+    margin: 10px auto;
+    padding: 10px;
+}
+.sectionComments__btnSend {
+    margin: 10px auto 10px 0;
+}
+
+
+
+/* -----------------------------------------------------------------ссылки----------------------------------------------------------------- */
+#access_auth {
+    display: none;
+}
+.wrapForm_signup {
+    display: none;
+}
+.wrapForm_login {
+    display: block;
+    text-align: center;
+}
+#access_auth:checked ~ #wrapForm_login{
+    display: none;
+}
+#access_auth:checked ~ #wrapForm_signup{
+    display:initial;
+    text-align: center;
+}
+.action_link {
+    background: #b621fe;
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: 20%;
+    height: 80%;
+    border-radius: 10%;
+}
+
+
+
+/* -----------------------------------------------------------------svg----------------------------------------------------------------- */
+.svgIcon {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+}
+.svgIcon path{
+    fill:rgb(204, 204, 204);
+}
+
+
+
+/* -----------------------------------------------------------------Главная----------------------------------------------------------------- */
+.action__table {
+    display: flex;
+    width: inherit;
+    height: inherit;
+}
+.wrapAction {
+    display: flex;
+    width: 160px;
+    height: 40px;
+    justify-content: space-around;
+    align-items: stretch;
+}
+
+
+
+/* ------------------------------------------------------------Аутентификация----------------------------------------------------------------- */
+.link_login, .link_signup {
+    color: #c0c940;
+}
+
+
+/* Просмотр книги */
+.cardBook {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    background-color: rgb(235, 219, 196);
+    width: inherit;
+    flex-grow: 1;
+}
+.wrapDataBook {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 10px;
+}
+.wrapImage {
+    display: flex;
+    height: auto;
+    background-color: #706f6f;
+    border: darkblue 1px solid;
+    flex-grow: 0;
+    align-items: center;
+}
+.sectionComments {
+    background-color: rgb(222, 227, 235);
+    width: inherit;
+    text-align: center;
+    flex-grow: 1;
+}
+.headerComments {
+    display: block;
+}
+.p-note {
+    display: block;
+}
+
+
+
+/* -----------------------------------------------------------------Комментарии----------------------------------------------------------------- */
+.sectionComments__ul {
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.sectionComments__wrapper {
+    background-color: rgb(172, 197, 147);
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+}
+.sectionComments__li {
+    display: block;
+}
+.sectionComments__input {
+    text-align: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+.sectionComments__input textarea {
+    border: 1px solid;
+    border-radius: 5px;
+    width: 50%;
+}
+.sectionComments__li {
+    list-style-type: none;
+    background-color: #fffefe;
+}
+.wrapComment {
+    padding: 10px;
+}
+.wrapComment__text {
+    text-align: left;
+}
+.wrapComment__avatar-module {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.wrapComment__replies {
+    text-align: start;
+    margin-top: 10px;
+}
+.wrapComment__replies_blue {
+    color: blue;
+}
+.wrapComment__avatar {
+    flex-grow: 0;
+}
+.wrapComment__name {
+    text-align: start;
+    flex-grow: 0;
+    margin-left: 10px;
+}
+.wrapComment__time {
+    flex-grow: 0;
+    margin-left: 10px;
+}
+.wrapComment__assessment {
+    flex-grow: 1;
+}

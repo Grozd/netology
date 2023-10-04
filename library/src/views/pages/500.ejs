@@ -1,0 +1,9 @@
+<%- include('../includes/layout-start') -%>
+
+<% if(data.note) { %>
+    <h1>500 | <%= data.note -%></h1>
+<% } else { %>
+    <h1>500 | Ошибка на стороне сервера</h1>
+<% } %>
+
+<%- include('../includes/layout-end') %>

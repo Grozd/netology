@@ -1,0 +1,10 @@
+<%- include('../includes/layout-start') -%>
+
+<h2 class="h_profile">Профиль</h2>
+
+<%- include('../includes/components/note') -%>
+<h2><%= data.user.username %></h2>
+
+<a href="/logout">Выйти</a>
+
+<%- include('../includes/layout-end')%>

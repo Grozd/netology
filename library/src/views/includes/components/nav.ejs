@@ -1,0 +1,13 @@
+<nav class="nav">
+    <ul class="nav__ul">
+        <li class="nav__item"><a class="nav__item_link" href="/">Главная</a></li>
+        <li class="nav__item"><a class="nav__item_link" href="/create">Добавление</a></li>
+        <li class="nav__item">
+            <% if(data.user === false) { %>
+                <a href="/api/user/login">Войти</a>    
+            <% } else { %>
+                <a href="/api/user/me">Профиль</a>
+            <% } %>   
+        </li>
+    </ul>
+</nav>

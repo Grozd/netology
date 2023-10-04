@@ -1,0 +1,21 @@
+<%- include('../includes/layout-start') %>
+
+<h2 class="h_create">Добавить новую книгу</h2>
+
+<%- include('../includes/components/note') -%>
+
+<form class="formNewBook" method="post" action="http://localhost:3000/create" enctype="multipart/form-data" accept=".txt">
+    <label class="form__label">Название книги</label>
+    <input name="title" required/>
+    <label class="form__label">Описание</label>
+    <textarea name="description"></textarea>
+    <label class="form__label">Автор</label>
+    <input name="authors" required/>
+    <label class="form__label">прикрепить файл книги</label>
+    <input type="file" name="fileBook" multiple accept=".pdf, .txt"/>
+    <label class="form__label">прикрепить обложку книги</label>
+    <input type="file" name="fileCover" accept=".jpg"/>
+    <%- include('../includes/components/button', { text: 'Отправить', type: 'submit', className: ''}) %>
+</form>
+
+<%- include('../includes/layout-end') %>

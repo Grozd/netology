@@ -1,0 +1,9 @@
+<%- include('../includes/layout-start') -%>
+
+<% if(data.note) { %>
+    <h1>404 | <%= data.note -%></h1>
+<% } else { %>
+    <h1>404 | Страница не найдена</h1>
+<% } %>
+
+<%- include('../includes/layout-end') %>
